@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.footersection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    font-family: "Poppins";
+}
+.footersection-main{
+    background-color: #1d1d1d;
+    width: 1500px;
+}
+.footer{
+    color: #d9d9dd;
+    display: flex;
+    align-items: center;
+    padding: 30px;
+}
+.footer_logo{
+    width: 300px;
+}
+.footer-content-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+}
+.footer-content-right{
+    height: 260px;
+    padding-left: 30px;
+    gap: 20px;
+    border-left: 1px solid white;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.footer-content-right-company h2{
+    
+    margin-left: -20px;
+}
+.footer-content-right-contact h2{
+    margin-left: -5px;
+}
+.footer-social-icons img{
+    width: 40px;
+    margin-right: 15px;
+}
+.footer hr{
+    width: 100%;
+    height: 2px;
+    margin: 20px 0;
+    background-color: grey;
+    border: none;
+}
+.footer-copyright{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+@media (max-width: 1300px){
+    .footersection-main{
+        width: 100%;
+    }
+}
+@media (max-width: 800px){
+    .footer{
+        flex-direction: column;
+    }
+    .footer-content-left {
+        width: 100%;
+    }
+    .footer-content-right{
+        justify-content: space-between;
+        margin-top: 20px;
+        padding-right: 50px;
+        border: none;
+        height: 150px;
+        width: 100%;
+    }
+    .footer-copyright{
+        text-align: center;
+    }
+    .footer_logo{
+        width: 350px;
+    }
+
+}
+@media (max-width: 400px){
+    .footer_logo{
+        width: 250px;
+    }
+    .footer{
+        padding: 10px;
+    }
+    .footer-content-left{
+        font-size: 15px;
+    }
+    .footer-content-right{
+        padding-right: 0px;
+        font-size: 12px;
+    }
+    .footer-copyright{
+        font-size: 11px;
+    }
+}

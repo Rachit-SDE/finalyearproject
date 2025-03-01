@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    height: 100vh;
+}
+.main-inner{
+    height: 90%;
+    display: flex;
+}
+.main-left{
+    width: 300px;
+}
+.main-right{
+    width: 90%;
+}

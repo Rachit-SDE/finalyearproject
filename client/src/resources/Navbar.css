@@ -1,0 +1,65 @@
+.navbar{
+    font-family: "Rubik", serif;
+    border-bottom: 2px solid black;
+    display: flex;
+    padding: 0;
+    height: 100%;
+    justify-content: center;
+}
+.inner-navbar{
+    width: 1200px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.navbar-logo{
+    display: flex;
+    align-items: center;
+    width: 20%;
+}
+.navbar-links{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 40%;
+    gap: 10px;
+}
+.navbar-link{
+    text-decoration: none;
+    color: rgb(45, 45, 45);
+} 
+.navbar-login{
+    display: flex;
+    align-items: center;
+    width: 25%;
+    
+}
+.navbar-login-button{
+    color: white;
+    background-color: #000066;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2px;
+    border: none;
+    height: 35px;
+    width: 120px;
+    border-radius: 5px;
+}
+.navbar-logout-button{
+    font-size: 17px;
+    font-weight: 600;
+    color: rgb(3, 0, 57);
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2px;
+    height: 35px;
+    width: 120px;
+    border-radius: 5px;
+}
+.navbar-logout-button img{
+    width: 30px;
+}
