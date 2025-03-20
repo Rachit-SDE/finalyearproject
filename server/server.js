@@ -15,7 +15,6 @@ app.use(express.json());
 app.use(cors({
   origin: 'https://captain-iota.vercel.app',  // Allow your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
 }));
 
 // database Connection
