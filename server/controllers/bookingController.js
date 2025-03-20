@@ -51,7 +51,7 @@ const getBookings = async (req, res) => {
 const fetchBookings = async(req, res) => {
 
     try {
-        const bookings = await Bookings.find({user:req.body.user} );
+        const bookings = await Bookings.find({userid:req.body.user} );
         res.json({ success: true, bookings });
     } catch (error) {
         res.json({ success: false, message: error.message });
