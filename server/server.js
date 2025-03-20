@@ -12,12 +12,11 @@ const app = express();
 const port = process.env.PORT || 4000;
 app.use(express.json());
 
-const corsOptions = {
-    origin: "*",
-    optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions))
+app.use(cors({
+  origin: 'https://captain-iota.vercel.app',  // Allow your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+}));
 
 // database Connection
 connectDB();
