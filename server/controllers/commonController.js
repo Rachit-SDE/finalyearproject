@@ -205,6 +205,22 @@ const updateLocation = async(req, res) => {
   }
 }
 
+const fetchLocation = async(req, res) => {
+  const { busnumber } = req.params;
+
+  try {
+    console.log(busnumber);
+    const response = await Bus.findOne({ busnumber: busnumber });
+    if(!response){
+      res.json({success: false, error});
+    }
+    res.json({success: true, message: "location update", response})
+  } catch (error) {
+    res.json({success: false, message: error.message});
+    console.log("error")
+  }
+}
+
 const getBusBookings = async(req, res) => {
   const {busid} = req.params;
   try {
@@ -221,4 +237,4 @@ const getBusBookings = async(req, res) => {
   }
 }
 
-export { searchResult, filterResult, Direction, captainLogin, captainLogout, updateLocation, getBusBookings };
+export { searchResult, filterResult, Direction, captainLogin, captainLogout, updateLocation, getBusBookings, fetchLocation };

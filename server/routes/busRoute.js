@@ -1,6 +1,6 @@
 import express from 'express';
 import { addBus, getBusById, listBus, removeBus, updateBus } from '../controllers/busController.js';
-import { captainLogin, captainLogout, Direction, filterResult, searchResult, updateLocation} from '../controllers/commonController.js';
+import { captainLogin, captainLogout, Direction, fetchLocation, filterResult, searchResult, updateLocation} from '../controllers/commonController.js';
 
 const busRouter = express.Router();
 
@@ -16,6 +16,7 @@ busRouter.get('/direction', Direction);
 busRouter.post('/captain-login', captainLogin);
 busRouter.post('/captain-logout', captainLogout);
 busRouter.post('/update-location', updateLocation);
+busRouter.get('/location/:busnumber', fetchLocation);
 
 
 export default busRouter;
