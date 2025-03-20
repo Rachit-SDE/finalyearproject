@@ -1,4 +1,5 @@
 import Bus from "../models/busModel.js";
+import Bookings from "../models/bookingModel.js";
 import axios from 'axios'
 
 // Optimized searchResult function
@@ -204,4 +205,20 @@ const updateLocation = async(req, res) => {
   }
 }
 
-export { searchResult, filterResult, Direction, captainLogin, captainLogout, updateLocation };
+const getBusBookings = async(req, res) => {
+  const {busid} = req.params;
+  try {
+    const busBookings = await Bookings.find({busid: busid})
+    console.log(busBookings.pasengers);
+    if(!busBookings){
+      res.json({success: false, error});
+    }
+    else{
+      res.json({success: true, message: "fetch bus bookings", busBookings })
+    }
+  } catch (error) {
+    console.log("there are error")
+  }
+}
+
+export { searchResult, filterResult, Direction, captainLogin, captainLogout, updateLocation, getBusBookings };
