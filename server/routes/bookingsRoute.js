@@ -5,7 +5,7 @@ import { getBusBookings } from '../controllers/commonController.js';
 const bookingRouter = express.Router();
 
 bookingRouter.post('/get-book', getBookings);
-bookingRouter.post('/get-bookings', fetchBookings);
+bookingRouter.get('/get-bookings', fetchBookings);
 bookingRouter.get('/getbusbookings/:busid', getBusBookings)
 
 // make payment
