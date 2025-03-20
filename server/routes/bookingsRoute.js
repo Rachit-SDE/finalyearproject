@@ -6,7 +6,7 @@ const bookingRouter = express.Router();
 
 bookingRouter.post('/get-book', getBookings);
 bookingRouter.post('/get-bookings', fetchBookings);
-bookingRouter.post('/getbusbookings/:busid', getBusBookings)
+bookingRouter.get('/getbusbookings/:busid', getBusBookings)
 
 // make payment
 
