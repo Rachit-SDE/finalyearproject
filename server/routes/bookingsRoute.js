@@ -1,6 +1,5 @@
 import express from 'express';
 import { fetchBookings, getBookings } from '../controllers/bookingController.js';
-import 'dotenv/config'
 
 const bookingRouter = express.Router();
 
