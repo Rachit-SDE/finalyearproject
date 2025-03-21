@@ -13,7 +13,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 
 app.use(cors({
-  origin: ['https://captain-iota.vercel.app','http://localhost:5174'],  // Allow your frontend domain
+  origin: ['https://captain-iota.vercel.app','http://localhost:5173'],  // Allow your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
 }));
 
