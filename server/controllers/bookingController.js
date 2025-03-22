@@ -4,21 +4,19 @@ import User from "../models/usersModel.js";
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';  // Ensure uuid is imported for idempotency key
 
+// Initialize Stripe with your secret key
 const stripe = new Stripe('sk_test_51PJawlSFdda55wRqn2s0GRcSrHjCXteQJJEH97dGmxRtQqwwudgWtKtFUXNHpAUOTfCW6QoMSragTYNSVtfuH3zb0002TffBhk');
-
 
 // Function to create a booking
 const getBookings = async (req, res) => {
-
-
-
     try {
-        console.log(req.body.busid, req.body.userid, req.body.budnumber)
+        console.log(req.body.busid, req.body.userid, req.body.budnumber);
+
         // Find the bus by ID
         const bus = await Bus.findById(req.body.busid);
         const user = await User.findById(req.body.userid);
-        const transactionId = await (req.body.transactionId); 
-        
+        const transactionId = req.body.transactionId; 
+
         // Check if the bus and user were found
         if (!bus) {
             return res.status(404).send({ success: false, message: "Bus not found" });
@@ -26,6 +24,9 @@ const getBookings = async (req, res) => {
         if (!user) {
             return res.status(404).send({ success: false, message: "User not found" });
         }
+
+        // Ensure seats is an array
+        const seats = Array.isArray(req.body.seats) ? req.body.seats : [];
 
         // Create a new booking
         const newBooking = new Bookings({
@@ -37,7 +38,7 @@ const getBookings = async (req, res) => {
         await newBooking.save();
 
         // Update the bus's seatsBooked
-        bus.seatsBooked = [...bus.seatsBooked, ...req.body.seats];
+        bus.seatsBooked = [...bus.seatsBooked, ...seats];  // Safely merge seats
 
         // Save the updated bus document
         await bus.save();
@@ -63,7 +64,7 @@ const PaymentGateway = async (req, res) => {
 
         // Create a payment intent (charge)
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: amount,  // amount in cents
+            amount: amount,  // amount in cents (e.g., 1000 for ₹10)
             currency: "inr",  // Ensure currency is set
             customer: customer.id,
             receipt_email: token.email,
