@@ -9,10 +9,14 @@ const stripe = new Stripe('sk_test_51PJawlSFdda55wRqn2s0GRcSrHjCXteQJJEH97dGmxRt
 
 // Function to create a booking
 const getBookings = async (req, res) => {
+
+
+
     try {
+        console.log(req.body.busid, req.body.userid, req.body.budnumber)
         // Find the bus by ID
-        const bus = await Bus.findById(req.body.bus);
-        const user = await User.findById(req.body.user);
+        const bus = await Bus.findById(req.body.busid);
+        const user = await User.findById(req.body.userid);
         const transactionId = await (req.body.transactionId); 
         
         // Check if the bus and user were found
