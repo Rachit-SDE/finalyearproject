@@ -9,8 +9,13 @@ const stripe = new Stripe('sk_test_51PJawlSFdda55wRqn2s0GRcSrHjCXteQJJEH97dGmxRt
 
 // Function to create a booking
 const getBookings = async (req, res) => {
+    const { busid, busnumber, userid, passenger, source, startpoint, destination, endpoint, totalprice, date } = req.body;
+
+    if (!busid || !busnumber || !userid || !Array.isArray(passengers)) {
+        return res.status(400).json({ message: 'Missing or invalid fields.' });
+    }
+    
     try {
-        console.log(req.body.busid, req.body.userid, req.body.budnumber);
 
         // Find the bus by ID
         const bus = await Bus.findById(req.body.busid);
@@ -30,7 +35,14 @@ const getBookings = async (req, res) => {
 
         // Create a new booking
         const newBooking = new Bookings({
-            ...req.body,
+            busid: busid,
+            busnumber: busnumber,
+            date: date,
+            destination: destination,
+            passengers: passengers,
+            source: source,
+            totalprice: totalPrice,
+            userid: userid,
             transactionId: transactionId, // This should ideally be generated dynamically
         });
 
