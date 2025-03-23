@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     phone: {type: Number, required:true},
     gender: {type: String, enum: ['male', 'female', 'other', 'prefer not to say'],},
-    adharcard: {type: String, unique: true},
+    adharcard: {type: String},
     isAdmin:{type: Boolean, default: false},
     FamilyData:[memberSchema],
     TicketData:{type:Object,default:{}},
