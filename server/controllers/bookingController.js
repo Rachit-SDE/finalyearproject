@@ -101,7 +101,9 @@ const fetchBookings = async (req, res) => {
     try {
         // Fetch bookings for a specific user
         const bookings = await Bookings.find({ userId: req.body.user });
-
+        if(!bookings){
+          res.json({ success: false, message: error.message });  
+        }
         res.json({ success: true, bookings });
     } catch (error) {
         res.json({ success: false, message: error.message });
