@@ -115,7 +115,7 @@ const PaymentGateway = async (req, res) => {
 const fetchBookings = async (req, res) => {
     try {
         // Fetch bookings for a specific user
-        const bookings = await Bookings.find({ userId: req.body.user });
+        const bookings = await Bookings.find({ userid: req.body.user });
 
         res.json({ success: true, bookings });
     } catch (error) {
