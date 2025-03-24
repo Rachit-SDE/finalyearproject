@@ -9,17 +9,13 @@ const stripe = new Stripe('sk_test_51PJawlSFdda55wRqn2s0GRcSrHjCXteQJJEH97dGmxRt
 
 // Function to create a booking
 const getBookings = async (req, res) => {
-    const { busid, busnumber, userid, passenger, source, startpoint, destination, endpoint, totalprice, date } = req.body;
-
-    if (!busid || !busnumber || !userid || !Array.isArray(passengers)) {
-        return res.status(400).json({ message: 'Missing or invalid fields.' });
-    }
-    
+    const {userid, busnumber, busid, date, destination, passengers, source, startpoint, endpoint, totalPrice, seats } = req.body;
     try {
+        console.log(busid, userid, busnumber);
 
         // Find the bus by ID
-        const bus = await Bus.findById(req.body.busid);
-        const user = await User.findById(req.body.userid);
+        const bus = await Bus.findById(busid);
+        const user = await User.findById(userid);
         const transactionId = req.body.transactionId; 
 
         // Check if the bus and user were found
@@ -31,29 +27,36 @@ const getBookings = async (req, res) => {
         }
 
         // Ensure seats is an array
-        const seats = Array.isArray(req.body.seats) ? req.body.seats : [];
+        
 
         // Create a new booking
         const newBooking = new Bookings({
             busid: busid,
-            busnumber: busnumber,
-            date: date,
-            destination: destination,
-            passengers: passengers,
-            source: source,
-            totalprice: totalPrice,
             userid: userid,
-            transactionId: transactionId, // This should ideally be generated dynamically
+            busnumber: busnumber,
+            passengers: passengers,
+            source:source,
+            startpoint: startpoint,
+            destination: destination,
+            endpoint: endpoint,
+            totalprice: totalPrice,
+            dat: date,
+            transactionid: transactionId, // This should ideally be generated dynamically
         });
 
         // Save the new booking
         await newBooking.save();
 
         // Update the bus's seatsBooked
-        bus.seatsBooked = [...bus.seatsBooked, ...seats];  // Safely merge seats
+        await passengers.map((passenger) => {
+             bus.seatsBooked.push(passenger.seats);
+             console.log(passenger.seats)
+        })  // Safely merge seats
 
         // Save the updated bus document
         await bus.save();
+
+        console.log(bus);
 
         // Send a success response
         res.status(201).send({ success: true, message: "Booking Successfully", newBooking });
@@ -113,9 +116,7 @@ const fetchBookings = async (req, res) => {
     try {
         // Fetch bookings for a specific user
         const bookings = await Bookings.find({ userId: req.body.user });
-        if(!bookings){
-          res.json({ success: false, message: error.message });  
-        }
+
         res.json({ success: true, bookings });
     } catch (error) {
         res.json({ success: false, message: error.message });
