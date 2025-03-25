@@ -3,7 +3,7 @@ import Bus from '../models/busModel.js';
 
 
 const addBus = async (req, res) => {
-    const {busnumber, busname, bustype, totalseats, availableseats, price, source, destination, arivaltime, departuretime, stops } = req.body;
+    const {busnumber, busname, bustype, totalseats, availableseats, price, source, destination, arivaltime, departuretime, stops, destinationpoint, sourcepoint } = req.body;
     let date = req.body.date;   
     const newdate = new Date(date);
     console.log(newdate);
@@ -20,6 +20,8 @@ const addBus = async (req, res) => {
         availableseats: availableseats,
         price: price,
         source: source,
+        sourcepoint: sourcepoint,
+        destinationpoint: destinationpoint,
         destination: destination,
         arivaltime: arivaltime,
         departuretime: departuretime,
