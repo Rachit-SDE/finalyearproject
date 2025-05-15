@@ -1,5 +1,6 @@
 import Bookings from "../models/bookingModel.js";
 import Bus from "../models/busModel.js";
+import Payment from "../models/paymentsModel.js";
 import User from "../models/usersModel.js";
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';  // Ensure uuid is imported for idempotency key
@@ -69,7 +70,7 @@ const getBookings = async (req, res) => {
 // Payment gateway handler
 const PaymentGateway = async (req, res) => {
     try {
-        const { token, amount } = req.body;
+        const { token, amount, } = req.body;
 
         // Create a Stripe customer using the provided token
         const customer = await stripe.customers.create({
@@ -88,11 +89,24 @@ const PaymentGateway = async (req, res) => {
             idempotencyKey: uuidv4(), // Ensure idempotency to avoid duplicate charges
         });
 
+        const newPayment = new Payment({
+
+        })
+
+
         // Check if payment was successful
         if (paymentIntent) {
+            const newPayment = new Payment({
+                userid: paymentIntent.receipt_email,
+                txnid: paymentIntent.id,
+                status:"Success",
+                method: "Card",
+                amount: paymentIntent.amount
+            })
+            const response = await newPayment.save();
             res.status(200).send({
                 message: "Payment successful",
-                transactionId: paymentIntent.id,
+                data: response,
                 success: true,
             });
         } else {
